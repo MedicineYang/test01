@@ -2,7 +2,7 @@
     <meta name="viewport" content="width=1728">
 </head>
 
-<div style="width: 1728px; margin: 0 auto; height: 4957px; position: relative; background: white; overflow: hidden">
+<div style="width: 1728px; height: 4957px; position: relative; background: white; overflow: hidden; transform-origin: top left;">
   <img style="width: 1728px; height: 1011px; left: 0px; top: 0px; position: absolute" src="https://placehold.co/1728x1011" />
   <div style="width: 957.23px; height: 396.76px; left: 411.70px; top: 311.50px; position: absolute; border: 3.45px white solid"></div>
   <div style="left: 647px; top: 1101px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 140px; font-family: Futura; font-weight: 500; word-wrap: break-word">INTRO</div>
@@ -99,3 +99,28 @@
     <div style="text-align: center; justify-content: center; display: flex; flex-direction: column; color: black; font-size: 20px; font-family: Noto Sans; font-weight: 700; word-wrap: break-word">聯絡我們</div>
   </div>
 </div>
+<script>
+  function autoScale() {
+    // 1. 抓取你的主要容器 (寬度為 1728px 的那個 div)
+    var content = document.querySelector('div[style*="width: 1728px"]');
+    
+    if (content) {
+      // 2. 計算縮放比例：視窗寬度 / 設計稿寬度
+      var scale = window.innerWidth / 1728;
+      
+      // 3. 設定縮放
+      content.style.transform = 'scale(' + scale + ')';
+      
+      // 4. 修正高度，避免下方出現超大留白
+      document.body.style.height = (4957 * scale) + 'px';
+      
+      // 5. 隱藏醜醜的卷軸
+      document.body.style.overflowX = 'hidden';
+      document.body.style.margin = '0';
+    }
+  }
+
+  // 當視窗大小改變或載入時，重新計算
+  window.addEventListener('resize', autoScale);
+  window.addEventListener('load', autoScale);
+</script>
